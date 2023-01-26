@@ -1,11 +1,42 @@
+using Microsoft.OpenApi.Models;
+using System.Reflection;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+var services = builder.Services;
 
-builder.Services.AddControllers();
+Dotnetstore.WebAPI.Intranet.IoC.BootstrapIServiceCollection.Build(ref services, builder.Configuration);
+
+services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+services.AddEndpointsApiExplorer();
+services.AddSwaggerGen(q =>
+{
+    q.SwaggerDoc("v1", new OpenApiInfo
+    {
+        Title = "Dotnetstore Intranet API",
+        Version = "v1",
+        Description = "An API for Dotnetstore Intranet",
+        TermsOfService = new Uri("https://www.google.se/"),
+        Contact = new OpenApiContact
+        {
+            Name = "Hans Sjödin",
+            Email = "hasse29@hotmail.com",
+            Url = new Uri("https://www.dotnetstore.se/")
+        },
+        License = new OpenApiLicense
+        {
+            Name = "MIT",
+            Url = new Uri("https://mit-license.org/")
+        }
+    });
+    q.ResolveConflictingActions(qq => qq.First());
+
+    var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+    var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+    q.IncludeXmlComments(xmlPath);
+});
 
 var app = builder.Build();
 
@@ -13,13 +44,13 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerUI(q =>
+    {
+        q.SwaggerEndpoint("/swagger/v1/swagger.json", "Dotnetstore Intranet API V1");
+    });
 }
 
 app.UseHttpsRedirection();
-
 app.UseAuthorization();
-
 app.MapControllers();
-
 app.Run();
