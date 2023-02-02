@@ -117,13 +117,46 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="CompanyIsRequired" xml:space="preserve">
+    <value>Company is required</value>
+  </data>
+  <data name="IAgree" xml:space="preserve">
+    <value>I agree</value>
+  </data>
   <data name="Login" xml:space="preserve">
     <value>Login</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="PasswordIsRequired" xml:space="preserve">
+    <value>Password is required</value>
   </data>
   <data name="PleaseSelect" xml:space="preserve">
     <value>Please Select</value>
   </data>
+  <data name="Reset" xml:space="preserve">
+    <value>Reset</value>
+  </data>
+  <data name="ResetValidation" xml:space="preserve">
+    <value>Reset Validation</value>
+  </data>
+  <data name="SelectCompany" xml:space="preserve">
+    <value>Select company</value>
+  </data>
   <data name="SelectThePlaceYouWorkIn" xml:space="preserve">
     <value>Select the place you work in</value>
+  </data>
+  <data name="Username" xml:space="preserve">
+    <value>Username</value>
+  </data>
+  <data name="UsernameIsRequired" xml:space="preserve">
+    <value>Username is required</value>
+  </data>
+  <data name="Validate" xml:space="preserve">
+    <value>Validate</value>
+  </data>
+  <data name="YouMustAgree" xml:space="preserve">
+    <value>You must agree</value>
   </data>
 </root>

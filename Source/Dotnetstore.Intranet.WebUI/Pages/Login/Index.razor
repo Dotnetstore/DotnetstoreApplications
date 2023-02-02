@@ -10,45 +10,71 @@
 
 <MudGrid Style="Margin: 20px;">
     <MudItem xs="12" sm="7">
+        @*@if (_ownCompanyDtos.Count < 1)
+        {
+        <p><em>Loading...</em></p>
+        }
+        else
+        {*@
         <MudPaper Class="pa-4">
             <MudForm @ref="form" @bind-IsValid="@success" @bind-Errors="@errors">
                 <MudSelect @bind-Value="stringValue"
-                           Label="Select fast-food"
+                           Required="true"
+                           RequiredError="@Local["CompanyIsRequired"]"
+                           Label="@Local["SelectCompany"]"
                            HelperText="@Local["SelectThePlaceYouWorkIn"]"
                            Placeholder="@Local["PleaseSelect"]"
                            AdornmentIcon="@Icons.Material.Filled.Store"
-                           AdornmentColor="Color.Primary">
-                    @*<MudSelectItem Value="@("Pizza")" Disabled="true">Pizza (Disabled)</MudSelectItem>
-                    <MudSelectItem Value="@("Burger")">Burger</MudSelectItem>
-                    <MudSelectItem Value="@("Hotdog")">Hot Dog</MudSelectItem>*@
+                           AdornmentColor="Color.Inherit">
+                    @foreach (var company in _ownCompanyDtos)
+                    {
+                        <MudSelectItem Value="@company.ID">@company.Name</MudSelectItem>
+                    }
                 </MudSelect>
-                <MudTextField T="string" Label="Username" Required="true" RequiredError="User name is required!" />
-                <MudTextField T="string" Label="Email" Required="true" RequiredError="Email is required!"
-                              Validation="@(new EmailAddressAttribute() { ErrorMessage = "The email address is invalid" })" />
-                <MudTextField T="string" Label="Password" HelperText="Choose a strong password" @ref="pwField1"
-                              InputType="InputType.Password"
-                              Validation="@(new Func<string, IEnumerable<string>>(PasswordStrength))" Required="true"
-                              RequiredError="Password is required!" />
                 <MudTextField T="string"
-                              Label="Password" HelperText="Repeat the password" InputType="InputType.Password"
-                              Validation="@(new Func<string, string>(PasswordMatch))" />
-                <div class="d-flex">
-                    <MudRadioGroup T="string" Required="true" RequiredError="Account type is required!">
-                        <MudRadio Option="@("Personal")">Personal</MudRadio>
-                        <MudRadio Option="@("Professional")">Professional</MudRadio>
-                    </MudRadioGroup>
-                </div>
+                              Label="@Local["Username"]"
+                              Required="true"
+                              RequiredError="@Local["UsernameIsRequired"]"
+                              Adornment="Adornment.End"
+                              AdornmentIcon="@Icons.Material.Filled.Key"
+                              AdornmentColor="Color.Inherit" />
+                <MudTextField T="string"
+                              Label="@Local["Password"]"
+                              HelperText="@Local["Password"]"
+                              @ref="pwField1"
+                              InputType="InputType.Password"
+                              Required="true"
+                              RequiredError="@Local["PasswordIsRequired"]"
+                              Adornment="Adornment.End"
+                              AdornmentIcon="@Icons.Material.Filled.Key"
+                              AdornmentColor="Color.Inherit" />
                 <div class="d-flex align-center justify-space-between">
-                    <MudCheckBox T="bool" Required="true" RequiredError="You must agree" Label="I agree!" />
-                    <MudButton Variant="Variant.Filled" Color="Color.Primary" Disabled="@(!success)" Class="ml-auto">@Local["Login"]</MudButton>
+                    <MudCheckBox T="bool"
+                                 Required="true"
+                                 RequiredError="@Local["YouMustAgree"]"
+                                 Label="@Local["IAgree"]" />
+                    <MudButton Variant="Variant.Filled"
+                               Color="Color.Primary"
+                               Disabled="@(!success)"
+                               Class="ml-auto">@Local["Login"]</MudButton>
                 </div>
             </MudForm>
         </MudPaper>
         <MudPaper Class="pa-4 mt-4">
-            <MudButton Variant="Variant.Filled" Color="Color.Primary" DisableElevation="true" OnClick="@(()=>form.Validate())">Validate</MudButton>
-            <MudButton Variant="Variant.Filled" Color="Color.Secondary" DisableElevation="true" OnClick="@(()=>form.Reset())" Class="mx-2">Reset</MudButton>
-            <MudButton Variant="Variant.Filled" DisableElevation="true" OnClick="@(()=>form.ResetValidation())">Reset Validation</MudButton>
+            <MudButton Variant="Variant.Filled"
+                       Color="Color.Primary"
+                       DisableElevation="true"
+                       OnClick="@(()=>form.Validate())">@Local["Validate"]</MudButton>
+            <MudButton Variant="Variant.Filled"
+                       Color="Color.Secondary"
+                       DisableElevation="true"
+                       OnClick="@(()=>form.Reset())"
+                       Class="mx-2">@Local["Reset"]</MudButton>
+            <MudButton Variant="Variant.Filled"
+                       DisableElevation="true"
+                       OnClick="@(()=>form.ResetValidation())">@Local["ResetValidation"]</MudButton>
         </MudPaper>
+        @*}*@
     </MudItem>
     <MudItem xs="12" sm="5">
         <MudPaper Class="pa-4 mud-height-full">
@@ -68,7 +94,9 @@
     MudForm form;
     private string stringValue { get; set; }
 
-    private IEnumerable<string> PasswordStrength(string pw)
+    private List<OwnCompanyDto> _ownCompanyDtos = new List<OwnCompanyDto>();
+
+    private static IEnumerable<string> PasswordStrength(string pw)
     {
         if (string.IsNullOrWhiteSpace(pw))
         {
