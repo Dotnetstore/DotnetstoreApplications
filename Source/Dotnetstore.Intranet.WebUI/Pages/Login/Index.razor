@@ -1,0 +1,109 @@
+﻿@page "/"
+@inject NavigationManager NavigationManager
+@using System.Text.RegularExpressions
+@using Dotnetstore.Shared.Business
+
+<PageTitle>Dotnetstore - Login</PageTitle>
+
+<MudCard Style="Margin: 20px" Elevation="4">
+    <MudCardHeader>
+        <CardHeaderAvatar>
+            <MudAvatar Color="Color.Secondary">DNS</MudAvatar>
+        </CardHeaderAvatar>
+        <CardHeaderContent>
+            <MudText Typo="Typo.body1">Dotnetstore Intranet</MudText>
+            <MudText Typo="Typo.body2">Login</MudText>
+        </CardHeaderContent>
+        <CardHeaderActions>
+            <MudIconButton Icon="@Icons.Material.Filled.Settings" Color="Color.Default" />
+        </CardHeaderActions>
+    </MudCardHeader>
+    @*<MudCardMedia Image="images/pilars.jpg" Height="250" />*@
+    <MudCardContent>
+        <MudGrid>
+            <MudItem xs="12" sm="7">
+                <MudPaper Class="pa-4">
+                    <MudForm @ref="form" @bind-IsValid="@success" @bind-Errors="@errors">
+                        <MudSelect @bind-Value="stringValue"
+                                   T="string"
+                                   Label="Select company"
+                                   HelperText="Select the company you work in"
+                                   Placeholder="Select company"
+                                   AdornmentIcon="@Icons.Material.Filled.BusinessCenter"
+                                   AdornmentColor="Color.Primary"
+                                   Required="true"
+                                   RequiredError="A company is required">
+                            @*<MudSelectItem Value="@("Pizza")" Disabled="true">Pizza (Disabled)</MudSelectItem>
+                            <MudSelectItem Value="@("Burger")">Burger</MudSelectItem>
+                            <MudSelectItem Value="@("Hotdog")">Hot Dog</MudSelectItem>*@
+                        </MudSelect>
+                        <MudTextField T="string"
+                                      Label="Username"
+                                      Required="true"
+                                      RequiredError="User name is required!" />
+                        <MudTextField T="string"
+                                      Label="Password"
+                                      HelperText="Password is required"
+                                      @ref="pwField1"
+                                      InputType="InputType.Password"
+                                      Validation="@(new Func<string, IEnumerable<string>>(PasswordStrength))" Required="true"
+                                      RequiredError="Password is required!" />
+                    </MudForm>
+                </MudPaper>
+            </MudItem>
+            <MudItem xs="12" sm="5">
+                <MudPaper Class="pa-4 mud-height-full">
+                    <MudText Typo="Typo.subtitle2">@($"Errors ({errors.Length})")</MudText>
+                        @foreach (var error in errors)
+                    {
+                        <MudText Color="@Color.Error">@error</MudText>
+                    }
+                </MudPaper>
+            </MudItem>
+        </MudGrid>
+        @*<MudText Typo="Typo.body2">This photo was taken in a small village in Istra Croatia.</MudText>*@
+    </MudCardContent>
+    <MudCardActions>
+        <MudIconButton Icon="@Icons.Material.Filled.Login" Color="Color.Default" />
+        <MudIconButton Icon="@Icons.Material.Filled.Delete" Color="Color.Default" />
+    </MudCardActions>
+
+</MudCard>
+
+@code
+{
+    bool success;
+    string[] errors = { };
+    MudTextField<string> pwField1;
+    MudForm form;
+    private List<OwnCompanyDto> _ownCompanyDtos = new List<OwnCompanyDto>();
+
+    private string stringValue { get; set; }
+
+    protected override Task OnInitializedAsync()
+    {
+        if (_ownCompanyDtos is null ||
+            _ownCompanyDtos.Count < 1)
+        {
+            NavigationManager.NavigateTo("/RegisterOwnCompany");
+        }
+        return base.OnInitializedAsync();
+    }
+
+    private static IEnumerable<string> PasswordStrength(string pw)
+    {
+        if (string.IsNullOrWhiteSpace(pw))
+        {
+            yield return "Password is required!";
+            yield break;
+        }
+        if (pw.Length < 8)
+            yield return "Password must be at least of length 8";
+        if (!Regex.IsMatch(pw, @"[A-Ö]"))
+            yield return "Password must contain at least one capital letter";
+        if (!Regex.IsMatch(pw, @"[a-ö]"))
+            yield return "Password must contain at least one lowercase letter";
+        if (!Regex.IsMatch(pw, @"[0-9]"))
+            yield return "Password must contain at least one digit";
+    }
+}
