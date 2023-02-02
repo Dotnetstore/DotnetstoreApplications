@@ -17,6 +17,9 @@
 	<ItemGroup>
 		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="7.0.2" />
 		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="7.0.2" PrivateAssets="all" />
+		<PackageReference Include="Microsoft.Extensions.Http" Version="7.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Localization" Version="7.0.2" />
+		<PackageReference Include="Microsoft.Net.Http.Headers" Version="2.2.8" />
 		<PackageReference Include="MudBlazor" Version="6.1.8" />
 	</ItemGroup>
 
@@ -30,6 +33,39 @@
 
 	<ItemGroup>
 	  <ProjectReference Include="..\Dotnetstore.Shared\Dotnetstore.Shared.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Compile Update="Shared\ResourceFiles\Login\LoginNavMenuResource.Designer.cs">
+	    <DesignTime>True</DesignTime>
+	    <AutoGen>True</AutoGen>
+	    <DependentUpon>LoginNavMenuResource.resx</DependentUpon>
+	  </Compile>
+	  <Compile Update="Shared\ResourceFiles\Login\LoginResource.Designer.cs">
+	    <DesignTime>True</DesignTime>
+	    <AutoGen>True</AutoGen>
+	    <DependentUpon>LoginResource.resx</DependentUpon>
+	  </Compile>
+	  <Compile Update="Shared\ResourceFiles\Resource.Designer.cs">
+	    <DesignTime>True</DesignTime>
+	    <AutoGen>True</AutoGen>
+	    <DependentUpon>Resource.resx</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <EmbeddedResource Update="Shared\ResourceFiles\Login\LoginNavMenuResource.resx">
+	    <Generator>PublicResXFileCodeGenerator</Generator>
+	    <LastGenOutput>LoginNavMenuResource.Designer.cs</LastGenOutput>
+	  </EmbeddedResource>
+	  <EmbeddedResource Update="Shared\ResourceFiles\Login\LoginResource.resx">
+	    <Generator>PublicResXFileCodeGenerator</Generator>
+	    <LastGenOutput>LoginResource.Designer.cs</LastGenOutput>
+	  </EmbeddedResource>
+	  <EmbeddedResource Update="Shared\ResourceFiles\Resource.resx">
+	    <Generator>PublicResXFileCodeGenerator</Generator>
+	    <LastGenOutput>Resource.Designer.cs</LastGenOutput>
+	  </EmbeddedResource>
 	</ItemGroup>
 
 </Project>
