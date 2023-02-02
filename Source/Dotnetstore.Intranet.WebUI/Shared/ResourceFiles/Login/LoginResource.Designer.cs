@@ -61,11 +61,47 @@ namespace Dotnetstore.Intranet.WebUI.Shared.ResourceFiles.Login {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Company is required.
+        /// </summary>
+        public static string CompanyIsRequired {
+            get {
+                return ResourceManager.GetString("CompanyIsRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to I agree.
+        /// </summary>
+        public static string IAgree {
+            get {
+                return ResourceManager.GetString("IAgree", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Login.
         /// </summary>
         public static string Login {
             get {
                 return ResourceManager.GetString("Login", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Password.
+        /// </summary>
+        public static string Password {
+            get {
+                return ResourceManager.GetString("Password", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Password is required.
+        /// </summary>
+        public static string PasswordIsRequired {
+            get {
+                return ResourceManager.GetString("PasswordIsRequired", resourceCulture);
             }
         }
         
@@ -79,11 +115,74 @@ namespace Dotnetstore.Intranet.WebUI.Shared.ResourceFiles.Login {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Reset.
+        /// </summary>
+        public static string Reset {
+            get {
+                return ResourceManager.GetString("Reset", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reset Validation.
+        /// </summary>
+        public static string ResetValidation {
+            get {
+                return ResourceManager.GetString("ResetValidation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select company.
+        /// </summary>
+        public static string SelectCompany {
+            get {
+                return ResourceManager.GetString("SelectCompany", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Select the place you work in.
         /// </summary>
         public static string SelectThePlaceYouWorkIn {
             get {
                 return ResourceManager.GetString("SelectThePlaceYouWorkIn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Username.
+        /// </summary>
+        public static string Username {
+            get {
+                return ResourceManager.GetString("Username", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Username is required.
+        /// </summary>
+        public static string UsernameIsRequired {
+            get {
+                return ResourceManager.GetString("UsernameIsRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Validate.
+        /// </summary>
+        public static string Validate {
+            get {
+                return ResourceManager.GetString("Validate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You must agree.
+        /// </summary>
+        public static string YouMustAgree {
+            get {
+                return ResourceManager.GetString("YouMustAgree", resourceCulture);
             }
         }
     }
