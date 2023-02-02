@@ -1,30 +1,16 @@
-﻿@page "/"
-@inject NavigationManager NavigationManager
-@inject IStringLocalizer<LoginResource> Local
-@inject IStringLocalizer<Resource> Global
-@using System.Text.RegularExpressions
-@using Dotnetstore.Shared.Business
+﻿@page "/RegisterUser"
 @using System.ComponentModel.DataAnnotations
+@using System.Text.RegularExpressions
 
-<PageTitle>Dotnetstore - @Local["Login"]</PageTitle>
+<PageTitle>Dotnetstore - Register user</PageTitle>
 
-<MudGrid Style="Margin: 20px;">
+<MudGrid>
     <MudItem xs="12" sm="7">
         <MudPaper Class="pa-4">
             <MudForm @ref="form" @bind-IsValid="@success" @bind-Errors="@errors">
-                <MudSelect @bind-Value="stringValue"
-                           Label="Select fast-food"
-                           HelperText="@Local["SelectThePlaceYouWorkIn"]"
-                           Placeholder="@Local["PleaseSelect"]"
-                           AdornmentIcon="@Icons.Material.Filled.Store"
-                           AdornmentColor="Color.Primary">
-                    @*<MudSelectItem Value="@("Pizza")" Disabled="true">Pizza (Disabled)</MudSelectItem>
-                    <MudSelectItem Value="@("Burger")">Burger</MudSelectItem>
-                    <MudSelectItem Value="@("Hotdog")">Hot Dog</MudSelectItem>*@
-                </MudSelect>
                 <MudTextField T="string" Label="Username" Required="true" RequiredError="User name is required!" />
                 <MudTextField T="string" Label="Email" Required="true" RequiredError="Email is required!"
-                              Validation="@(new EmailAddressAttribute() { ErrorMessage = "The email address is invalid" })" />
+                              Validation="@(new EmailAddressAttribute() {ErrorMessage = "The email address is invalid"})" />
                 <MudTextField T="string" Label="Password" HelperText="Choose a strong password" @ref="pwField1"
                               InputType="InputType.Password"
                               Validation="@(new Func<string, IEnumerable<string>>(PasswordStrength))" Required="true"
@@ -40,7 +26,7 @@
                 </div>
                 <div class="d-flex align-center justify-space-between">
                     <MudCheckBox T="bool" Required="true" RequiredError="You must agree" Label="I agree!" />
-                    <MudButton Variant="Variant.Filled" Color="Color.Primary" Disabled="@(!success)" Class="ml-auto">@Local["Login"]</MudButton>
+                    <MudButton Variant="Variant.Filled" Color="Color.Primary" Disabled="@(!success)" Class="ml-auto">Register</MudButton>
                 </div>
             </MudForm>
         </MudPaper>
@@ -60,13 +46,11 @@
         </MudPaper>
     </MudItem>
 </MudGrid>
-
 @code {
     bool success;
     string[] errors = { };
     MudTextField<string> pwField1;
     MudForm form;
-    private string stringValue { get; set; }
 
     private IEnumerable<string> PasswordStrength(string pw)
     {

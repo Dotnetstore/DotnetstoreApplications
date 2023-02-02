@@ -1,0 +1,24 @@
+﻿@inject IStringLocalizer<LoginNavMenuResource> Local
+
+<MudNavMenu>
+    <MudNavLink Href="/"
+                Match="NavLinkMatch.All"
+                Icon="@Icons.Material.Filled.Login"
+                IconColor="Color.Inherit">@Local["Login"]</MudNavLink>
+    <MudNavLink Href="/RegisterUser"
+                Match="NavLinkMatch.Prefix"
+                Icon="@Icons.Material.Filled.AppRegistration"
+                IconColor="Color.Inherit">@Local["RegisterUser"]</MudNavLink>
+    @*<MudNavGroup Title="Settings" Expanded="true">
+    <MudNavLink Href="/users" Match="NavLinkMatch.Prefix">Users</MudNavLink>
+    <MudNavLink Href="/security" Match="NavLinkMatch.Prefix">Security</MudNavLink>
+    </MudNavGroup>*@
+    <MudNavLink Href="/About"
+                Match="NavLinkMatch.Prefix"
+                Icon="@Icons.Material.Filled.Info"
+                IconColor="Color.Inherit">@Local["About"]</MudNavLink>
+</MudNavMenu>
+
+@code {
+
+}
