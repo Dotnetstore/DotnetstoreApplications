@@ -1,4 +1,6 @@
-﻿namespace Dotnetstore.Business.Repositories;
+﻿using Dotnetstore.Business.Services.Helpers;
+
+namespace Dotnetstore.Business.Services.OwnCompanies;
 
 public interface IOwnCompanyRepository : IGenericRepository<OwnCompany>
 {

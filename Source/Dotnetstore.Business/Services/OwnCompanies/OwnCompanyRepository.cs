@@ -1,6 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Dotnetstore.Business.Services.Helpers;
+using Microsoft.EntityFrameworkCore;
 
-namespace Dotnetstore.Business.Repositories;
+namespace Dotnetstore.Business.Services.OwnCompanies;
 
 public sealed class OwnCompanyRepository : GenericRepository<OwnCompany, BusinessContext>, IOwnCompanyRepository
 {
@@ -34,7 +35,7 @@ public sealed class OwnCompanyRepository : GenericRepository<OwnCompany, Busines
         }
 
         return await cx.OwnCompanies
-            .Where(q => !q.IsDeleted.HasValue || (q.IsDeleted.HasValue && !q.IsDeleted.Value))
+            .Where(q => !q.IsDeleted.HasValue || q.IsDeleted.HasValue && !q.IsDeleted.Value)
             .OrderBy(q => q.Name)
             .ThenBy(q => q.CorporateID)
             .AsNoTracking()

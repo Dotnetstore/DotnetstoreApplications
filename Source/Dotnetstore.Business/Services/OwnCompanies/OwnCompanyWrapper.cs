@@ -1,9 +1,8 @@
 ﻿using Dotnetstore.Business.Helpers;
-using Dotnetstore.Business.Services;
 using Dotnetstore.Core.Abstracts;
 using Dotnetstore.Shared.Business;
 
-namespace Dotnetstore.Business.Wrappers;
+namespace Dotnetstore.Business.Services.OwnCompanies;
 
 public class OwnCompanyWrapper : Disposable, IOwnCompanyWrapper
 {

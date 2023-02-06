@@ -1,4 +1,6 @@
-﻿namespace Dotnetstore.TestHelper.Interfaces.Business;
+﻿using Dotnetstore.Business.Services.OwnCompanies;
+
+namespace Dotnetstore.TestHelper.Interfaces.Business;
 
 public interface IOwnCompanyTestWrapper
 {

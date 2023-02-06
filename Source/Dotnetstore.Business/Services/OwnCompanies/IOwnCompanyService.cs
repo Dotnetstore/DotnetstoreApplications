@@ -1,4 +1,6 @@
-﻿namespace Dotnetstore.Business.Services;
+﻿using Dotnetstore.Business.Services.Helpers;
+
+namespace Dotnetstore.Business.Services.OwnCompanies;
 
 public interface IOwnCompanyService : IGenericService<OwnCompany>
 {

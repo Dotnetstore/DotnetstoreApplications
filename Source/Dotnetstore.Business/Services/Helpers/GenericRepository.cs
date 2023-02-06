@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
-namespace Dotnetstore.Business.Repositories;
+namespace Dotnetstore.Business.Services.Helpers;
 
 public class GenericRepository<T, TU> : Disposable, IGenericRepository<T> where T : class where TU : DbContext
 {

@@ -1,4 +1,5 @@
-﻿using Dotnetstore.TestHelper.Mocks.Business;
+﻿using Dotnetstore.Business.Services.OwnCompanies;
+using Dotnetstore.TestHelper.Mocks.Business;
 
 namespace Dotnetstore.TestHelper.Services.Business;
 

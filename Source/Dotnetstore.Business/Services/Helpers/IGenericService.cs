@@ -1,6 +1,6 @@
 ﻿using System.Linq.Expressions;
 
-namespace Dotnetstore.Business.Services;
+namespace Dotnetstore.Business.Services.Helpers;
 
 public interface IGenericService<T> where T : class
 {

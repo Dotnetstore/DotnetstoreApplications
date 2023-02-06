@@ -1,4 +1,4 @@
-﻿namespace Dotnetstore.Business.Wrappers;
+﻿namespace Dotnetstore.Business.Services.BusinessEntities;
 
 public interface IBusinessEntityWrapper
 {

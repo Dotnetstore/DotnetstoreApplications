@@ -1,6 +1,6 @@
 ﻿using Dotnetstore.Shared.Business;
 
-namespace Dotnetstore.Business.Wrappers;
+namespace Dotnetstore.Business.Services.OwnCompanies;
 
 public interface IOwnCompanyWrapper
 {

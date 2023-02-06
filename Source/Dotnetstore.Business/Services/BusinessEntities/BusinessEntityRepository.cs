@@ -1,6 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Dotnetstore.Business.Services.Helpers;
+using Microsoft.EntityFrameworkCore;
 
-namespace Dotnetstore.Business.Repositories;
+namespace Dotnetstore.Business.Services.BusinessEntities;
 
 public sealed class BusinessEntityRepository : GenericRepository<BusinessEntity, BusinessContext>, IBusinessEntityRepository
 {
