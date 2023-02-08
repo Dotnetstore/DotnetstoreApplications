@@ -1,4 +1,6 @@
-﻿namespace Dotnetstore.TestHelper.Interfaces.Business;
+﻿using Dotnetstore.Business.Services.BusinessEntities;
+
+namespace Dotnetstore.TestHelper.Interfaces.Business;
 
 public interface IBusinessEntityTestWrapper
 {

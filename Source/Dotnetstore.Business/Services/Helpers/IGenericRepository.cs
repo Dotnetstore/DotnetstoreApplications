@@ -1,6 +1,6 @@
 ﻿using System.Linq.Expressions;
 
-namespace Dotnetstore.Business.Repositories;
+namespace Dotnetstore.Business.Services.Helpers;
 
 public interface IGenericRepository<T> where T : class
 {

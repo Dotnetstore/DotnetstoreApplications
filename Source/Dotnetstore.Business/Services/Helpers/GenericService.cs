@@ -1,8 +1,7 @@
-﻿using Dotnetstore.Business.Repositories;
-using Dotnetstore.Core.Abstracts;
+﻿using Dotnetstore.Core.Abstracts;
 using System.Linq.Expressions;
 
-namespace Dotnetstore.Business.Services;
+namespace Dotnetstore.Business.Services.Helpers;
 
 public class GenericService<T> : Disposable, IGenericService<T> where T : BaseModel
 {

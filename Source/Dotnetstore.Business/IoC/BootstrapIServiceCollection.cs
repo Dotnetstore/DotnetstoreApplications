@@ -1,6 +1,5 @@
-﻿using Dotnetstore.Business.Repositories;
-using Dotnetstore.Business.Services;
-using Dotnetstore.Business.Wrappers;
+﻿using Dotnetstore.Business.Services.BusinessEntities;
+using Dotnetstore.Business.Services.OwnCompanies;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -19,6 +18,7 @@ public static class BootstrapIServiceCollection
         serviceCollection.AddSingleton<IOwnCompanyService, OwnCompanyService>();
         serviceCollection.AddSingleton<IOwnCompanyWrapper, OwnCompanyWrapper>();
 
-        serviceCollection.AddDbContextFactory<BusinessContext>(q => q.UseSqlServer(configuration.GetSection("ConnectionStrings:DotnetstoreIntranetConnectionString").Value));
+        serviceCollection.AddDbContextFactory<BusinessContext>(q =>
+            q.UseSqlServer(configuration.GetSection("ConnectionStrings:DotnetstoreIntranetConnectionString").Value));
     }
 }

@@ -1,7 +1,6 @@
-﻿using Dotnetstore.Business.Services;
-using Dotnetstore.Core.Abstracts;
+﻿using Dotnetstore.Core.Abstracts;
 
-namespace Dotnetstore.Business.Wrappers;
+namespace Dotnetstore.Business.Services.BusinessEntities;
 
 public sealed class BusinessEntityWrapper : Disposable, IBusinessEntityWrapper
 {

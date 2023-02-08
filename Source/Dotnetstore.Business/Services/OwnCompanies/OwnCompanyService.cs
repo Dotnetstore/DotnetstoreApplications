@@ -1,6 +1,6 @@
-﻿using Dotnetstore.Business.Repositories;
+﻿using Dotnetstore.Business.Services.Helpers;
 
-namespace Dotnetstore.Business.Services;
+namespace Dotnetstore.Business.Services.OwnCompanies;
 
 public sealed class OwnCompanyService : GenericService<OwnCompany>, IOwnCompanyService
 {

@@ -18,6 +18,57 @@ public class Business : ControllerBase, IDisposable
     }
 
     /// <summary>
+    ///     Gets all own companies, deleted and active.
+    /// </summary>
+    /// <remarks>
+    ///     Sample request:
+    ///
+    ///     GET /api/Business/GetAllOwnCompany
+    /// </remarks>
+    /// <returns>List&lt;OwnCompanyDto&gt;</returns>
+    /// GET: /api/Business/GetAllOwnCompany
+    [HttpGet]
+    public async Task<ActionResult> GetAllOwnCompanyAsync()
+    {
+        var result = await _unitOfWorks.Business.OwnCompany.GetAllAsync();
+        return Ok(result);
+    }
+
+    /// <summary>
+    ///     Gets all available own companies.
+    /// </summary>
+    /// <remarks>
+    ///     Sample request:
+    ///
+    ///     GET /api/Business/GetAllAvailableOwnCompany
+    /// </remarks>
+    /// <returns>List&lt;OwnCompanyDto&gt;</returns>
+    /// GET: /api/Business/GetAllAvailableOwnCompany
+    [HttpGet]
+    public async Task<ActionResult> GetAllAvailableOwnCompanyAsync()
+    {
+        var result = await _unitOfWorks.Business.OwnCompany.GetAllAvailableAsync();
+        return Ok(result);
+    }
+
+    /// <summary>
+    ///     Gets all deleted own companies.
+    /// </summary>
+    /// <remarks>
+    ///     Sample request:
+    ///
+    ///     GET /api/Business/GetAllDeletedOwnCompany
+    /// </remarks>
+    /// <returns>List&lt;OwnCompanyDto&gt;</returns>
+    /// GET: /api/Business/GetAllDeletedOwnCompany
+    [HttpGet]
+    public async Task<ActionResult> GetAllDeletedOwnCompanyAsync()
+    {
+        var result = await _unitOfWorks.Business.OwnCompany.GetAllDeletedAsync();
+        return Ok(result);
+    }
+
+    /// <summary>
     ///     Add a new own company.
     /// </summary>
     /// <remarks>

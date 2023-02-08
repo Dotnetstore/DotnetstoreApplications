@@ -1,4 +1,6 @@
-﻿namespace Dotnetstore.TestHelper.Mocks.Business;
+﻿using Dotnetstore.Business.Services.OwnCompanies;
+
+namespace Dotnetstore.TestHelper.Mocks.Business;
 
 internal static class MockIOwnCompanyRepository
 {
