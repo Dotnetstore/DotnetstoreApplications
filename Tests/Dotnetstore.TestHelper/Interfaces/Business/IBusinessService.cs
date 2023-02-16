@@ -2,7 +2,5 @@
 
 public interface IBusinessService
 {
-    IBusinessEntityTestWrapper BusinessEntity { get; }
-
     IOwnCompanyTestWrapper OwnCompany { get; }
 }

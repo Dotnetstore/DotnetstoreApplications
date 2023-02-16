@@ -8,7 +8,6 @@ builder.RootComponents.Add<HeadOutlet>("head::after");
 
 var services = builder.Services;
 
-//services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
-Dotnetstore.Intranet.WebUI.IoC.BootstrapIServiceCollection.Build(ref services, builder.HostEnvironment.BaseAddress);
+Dotnetstore.Intranet.WebUI.IoC.BootstrapIServiceCollection.Build(ref services, builder.Configuration);
 
 await builder.Build().RunAsync();

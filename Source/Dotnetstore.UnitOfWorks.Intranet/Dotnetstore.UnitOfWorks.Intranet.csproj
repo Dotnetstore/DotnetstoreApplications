@@ -11,7 +11,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Dotnetstore.Business\Dotnetstore.Business.csproj" />
+    <ProjectReference Include="..\Dotnetstore.Business.Repository.EF\Dotnetstore.Business.Repository.EF.csproj" />
+    <ProjectReference Include="..\Dotnetstore.Business.Service\Dotnetstore.Business.Service.csproj" />
   </ItemGroup>
 
 </Project>

@@ -19,7 +19,7 @@ public class OwnCompanyRepositoryTests
         if (_testHelperService is null)
             return;
 
-        var ownCompanyToAdd = new Models.OwnCompany
+        var ownCompanyToAdd = new Domain.Business.OwnCompany
         {
             Name = name,
             Description = description,
@@ -35,7 +35,7 @@ public class OwnCompanyRepositoryTests
         if (_testHelperService is null)
             return;
 
-        var ownCompanyToAdd = new Models.OwnCompany
+        var ownCompanyToAdd = new Domain.Business.OwnCompany
         {
             Name = "Dotnetstore",
             Description = "My own company",
@@ -45,7 +45,7 @@ public class OwnCompanyRepositoryTests
 
         await _testHelperService.Business.OwnCompany.Repository.AddAsync(ownCompanyToAdd);
 
-        ownCompanyToAdd = new Models.OwnCompany
+        ownCompanyToAdd = new Domain.Business.OwnCompany
         {
             Name = "Dotnetstore",
             Description = "My own company",
@@ -56,7 +56,7 @@ public class OwnCompanyRepositoryTests
 
         await _testHelperService.Business.OwnCompany.Repository.AddAsync(ownCompanyToAdd);
 
-        ownCompanyToAdd = new Models.OwnCompany
+        ownCompanyToAdd = new Domain.Business.OwnCompany
         {
             Name = "Dotnetstore",
             Description = "My own company",
@@ -75,7 +75,7 @@ public class OwnCompanyRepositoryTests
         var list = await _testHelperService.Business.OwnCompany.Repository.GetAllAsync();
 
         Assert.That(list, Is.Not.Null);
-        Assert.That(list, Is.InstanceOf<List<Models.OwnCompany>>());
+        Assert.That(list, Is.InstanceOf<List<Domain.Business.OwnCompany>>());
         Assert.That(list, Has.Count.EqualTo(expectedQuantity));
     }
 
@@ -87,7 +87,7 @@ public class OwnCompanyRepositoryTests
         var list = await _testHelperService.Business.OwnCompany.Repository.GetAllDeletedAsync();
 
         Assert.That(list, Is.Not.Null);
-        Assert.That(list, Is.InstanceOf<List<Models.OwnCompany>>());
+        Assert.That(list, Is.InstanceOf<List<Domain.Business.OwnCompany>>());
         Assert.That(list, Has.Count.EqualTo(expectedQuantity));
     }
 
@@ -99,7 +99,7 @@ public class OwnCompanyRepositoryTests
         var list = await _testHelperService.Business.OwnCompany.Repository.GetAllAvailableAsync();
 
         Assert.That(list, Is.Not.Null);
-        Assert.That(list, Is.InstanceOf<List<Models.OwnCompany>>());
+        Assert.That(list, Is.InstanceOf<List<Domain.Business.OwnCompany>>());
         Assert.That(list, Has.Count.EqualTo(expectedQuantity));
     }
 

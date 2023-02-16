@@ -2,23 +2,24 @@
 @inject NavigationManager NavigationManager
 @inject IStringLocalizer<LoginResource> Local
 @inject IStringLocalizer<Resource> Global
+@inject IUnitOfWork UnitOfWork
 @using System.Text.RegularExpressions
 @using Dotnetstore.Shared.Business
-@using System.ComponentModel.DataAnnotations
+@using Dotnetstore.UnitOfWorks.Intranet.Frontend
 
 <PageTitle>Dotnetstore - @Local["Login"]</PageTitle>
 
 <MudGrid Style="Margin: 20px;">
     <MudItem xs="12" sm="7">
-        @*@if (_ownCompanyDtos.Count < 1)
+        @if (_ownCompanyDtos.Count < 1)
         {
-        <p><em>Loading...</em></p>
+            <p><em>Loading...</em></p>
         }
         else
-        {*@
-        <MudPaper Class="pa-4">
-            <MudForm @ref="form" @bind-IsValid="@success" @bind-Errors="@errors">
-                <MudSelect @bind-Value="stringValue"
+        {
+            <MudPaper Class="pa-4">
+                <MudForm @ref="form" @bind-IsValid="@success" @bind-Errors="@errors">
+                    <MudSelect @bind-Value="stringValue"
                            Required="true"
                            RequiredError="@Local["CompanyIsRequired"]"
                            Label="@Local["SelectCompany"]"
@@ -26,19 +27,19 @@
                            Placeholder="@Local["PleaseSelect"]"
                            AdornmentIcon="@Icons.Material.Filled.Store"
                            AdornmentColor="Color.Inherit">
-                    @foreach (var company in _ownCompanyDtos)
-                    {
-                        <MudSelectItem Value="@company.ID">@company.Name</MudSelectItem>
-                    }
-                </MudSelect>
-                <MudTextField T="string"
+                        @foreach (var company in _ownCompanyDtos)
+                        {
+                            <MudSelectItem Value="@company.ID">@company.Name</MudSelectItem>
+                        }
+                    </MudSelect>
+                    <MudTextField T="string"
                               Label="@Local["Username"]"
                               Required="true"
                               RequiredError="@Local["UsernameIsRequired"]"
                               Adornment="Adornment.End"
                               AdornmentIcon="@Icons.Material.Filled.Key"
                               AdornmentColor="Color.Inherit" />
-                <MudTextField T="string"
+                    <MudTextField T="string"
                               Label="@Local["Password"]"
                               HelperText="@Local["Password"]"
                               @ref="pwField1"
@@ -48,33 +49,33 @@
                               Adornment="Adornment.End"
                               AdornmentIcon="@Icons.Material.Filled.Key"
                               AdornmentColor="Color.Inherit" />
-                <div class="d-flex align-center justify-space-between">
-                    <MudCheckBox T="bool"
+                    <div class="d-flex align-center justify-space-between">
+                        <MudCheckBox T="bool"
                                  Required="true"
                                  RequiredError="@Local["YouMustAgree"]"
                                  Label="@Local["IAgree"]" />
-                    <MudButton Variant="Variant.Filled"
+                        <MudButton Variant="Variant.Filled"
                                Color="Color.Primary"
                                Disabled="@(!success)"
                                Class="ml-auto">@Local["Login"]</MudButton>
-                </div>
-            </MudForm>
-        </MudPaper>
-        <MudPaper Class="pa-4 mt-4">
-            <MudButton Variant="Variant.Filled"
+                    </div>
+                </MudForm>
+            </MudPaper>
+            <MudPaper Class="pa-4 mt-4">
+                <MudButton Variant="Variant.Filled"
                        Color="Color.Primary"
                        DisableElevation="true"
                        OnClick="@(()=>form.Validate())">@Local["Validate"]</MudButton>
-            <MudButton Variant="Variant.Filled"
+                <MudButton Variant="Variant.Filled"
                        Color="Color.Secondary"
                        DisableElevation="true"
                        OnClick="@(()=>form.Reset())"
                        Class="mx-2">@Local["Reset"]</MudButton>
-            <MudButton Variant="Variant.Filled"
+                <MudButton Variant="Variant.Filled"
                        DisableElevation="true"
                        OnClick="@(()=>form.ResetValidation())">@Local["ResetValidation"]</MudButton>
-        </MudPaper>
-        @*}*@
+            </MudPaper>
+        }
     </MudItem>
     <MudItem xs="12" sm="5">
         <MudPaper Class="pa-4 mud-height-full">
@@ -95,6 +96,25 @@
     private string stringValue { get; set; }
 
     private List<OwnCompanyDto> _ownCompanyDtos = new List<OwnCompanyDto>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        await Task.Delay(1);
+        await LoadOwnCompaniesAsync();
+        await base.OnInitializedAsync();
+    }
+
+    private async Task LoadOwnCompaniesAsync()
+    {
+        var result = await UnitOfWork.Business.OwnCompany.GetAllAvailableAsync();
+
+        if (result.Response.Count < 1)
+        {
+            NavigationManager.NavigateTo("/RegisterOwnCompany");
+        }
+
+        _ownCompanyDtos = result.Response;
+    }
 
     private static IEnumerable<string> PasswordStrength(string pw)
     {

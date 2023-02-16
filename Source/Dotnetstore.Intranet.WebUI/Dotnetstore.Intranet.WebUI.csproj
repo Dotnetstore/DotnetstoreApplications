@@ -17,6 +17,7 @@
 	<ItemGroup>
 		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="7.0.2" />
 		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="7.0.2" PrivateAssets="all" />
+		<PackageReference Include="Microsoft.AspNetCore.Cors" Version="2.2.0" />
 		<PackageReference Include="Microsoft.Extensions.Http" Version="7.0.0" />
 		<PackageReference Include="Microsoft.Extensions.Localization" Version="7.0.2" />
 		<PackageReference Include="Microsoft.Net.Http.Headers" Version="2.2.8" />
@@ -32,8 +33,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\Dotnetstore.Core\Dotnetstore.Core.csproj" />
-	  <ProjectReference Include="..\Dotnetstore.Shared\Dotnetstore.Shared.csproj" />
+	  <ProjectReference Include="..\Dotnetstore.UnitOfWorks.Intranet.Frontend\Dotnetstore.UnitOfWorks.Intranet.Frontend.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -47,11 +47,22 @@
 	    <AutoGen>True</AutoGen>
 	    <DependentUpon>LoginResource.resx</DependentUpon>
 	  </Compile>
+	  <Compile Update="Shared\ResourceFiles\Login\RegisterOwnCompanyResource.Designer.cs">
+	    <DesignTime>True</DesignTime>
+	    <AutoGen>True</AutoGen>
+	    <DependentUpon>RegisterOwnCompanyResource.resx</DependentUpon>
+	  </Compile>
 	  <Compile Update="Shared\ResourceFiles\Resource.Designer.cs">
 	    <DesignTime>True</DesignTime>
 	    <AutoGen>True</AutoGen>
 	    <DependentUpon>Resource.resx</DependentUpon>
 	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Content Update="wwwroot\appsettings.json">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
 	</ItemGroup>
 
 	<ItemGroup>
@@ -62,6 +73,10 @@
 	  <EmbeddedResource Update="Shared\ResourceFiles\Login\LoginResource.resx">
 	    <Generator>PublicResXFileCodeGenerator</Generator>
 	    <LastGenOutput>LoginResource.Designer.cs</LastGenOutput>
+	  </EmbeddedResource>
+	  <EmbeddedResource Update="Shared\ResourceFiles\Login\RegisterOwnCompanyResource.resx">
+	    <Generator>PublicResXFileCodeGenerator</Generator>
+	    <LastGenOutput>RegisterOwnCompanyResource.Designer.cs</LastGenOutput>
 	  </EmbeddedResource>
 	  <EmbeddedResource Update="Shared\ResourceFiles\Resource.resx">
 	    <Generator>PublicResXFileCodeGenerator</Generator>

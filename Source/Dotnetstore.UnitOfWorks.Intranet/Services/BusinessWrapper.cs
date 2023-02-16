@@ -1,4 +1,4 @@
-﻿using Dotnetstore.Business.Services.OwnCompanies;
+﻿using Dotnetstore.Intranet.Contract.Business;
 using Dotnetstore.UnitOfWorks.Intranet.Interfaces;
 
 namespace Dotnetstore.UnitOfWorks.Intranet.Services;

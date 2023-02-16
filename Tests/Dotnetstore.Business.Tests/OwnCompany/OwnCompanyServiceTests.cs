@@ -51,7 +51,7 @@ public class OwnCompanyServiceTests
 
         Guid? userID = null;
 
-        var ownCompanyToAdd = new Models.OwnCompany
+        var ownCompanyToAdd = new Domain.Business.OwnCompany
         {
             Name = "Dotnetstore",
             Description = "My own company",
@@ -60,7 +60,7 @@ public class OwnCompanyServiceTests
 
         await _testHelperService.Business.OwnCompany.Service.AddAsync(ownCompanyToAdd, userID);
 
-        ownCompanyToAdd = new Models.OwnCompany
+        ownCompanyToAdd = new Domain.Business.OwnCompany
         {
             Name = "Dotnetstore",
             Description = "My own company",
@@ -70,7 +70,7 @@ public class OwnCompanyServiceTests
 
         await _testHelperService.Business.OwnCompany.Service.AddAsync(ownCompanyToAdd, userID);
 
-        ownCompanyToAdd = new Models.OwnCompany
+        ownCompanyToAdd = new Domain.Business.OwnCompany
         {
             Name = "Dotnetstore",
             Description = "My own company",
@@ -85,7 +85,7 @@ public class OwnCompanyServiceTests
         if (_testHelperService is null)
             return;
 
-        var ownCompanyToAdd = new Models.OwnCompany
+        var ownCompanyToAdd = new Domain.Business.OwnCompany
         {
             Name = name,
             Description = description,
@@ -94,6 +94,7 @@ public class OwnCompanyServiceTests
 
         await _testHelperService.Business.OwnCompany.Service.AddAsync(ownCompanyToAdd, null);
     }
+
     private async Task GetOwnCompanyAsync(int expectedQuantity)
     {
         if (_testHelperService is null)
@@ -102,7 +103,7 @@ public class OwnCompanyServiceTests
         var list = await _testHelperService.Business.OwnCompany.Service.GetAllAsync();
 
         Assert.That(list, Is.Not.Null);
-        Assert.That(list, Is.InstanceOf<List<Models.OwnCompany>>());
+        Assert.That(list, Is.InstanceOf<List<Domain.Business.OwnCompany>>());
         Assert.That(list, Has.Count.EqualTo(expectedQuantity));
     }
 
@@ -114,7 +115,7 @@ public class OwnCompanyServiceTests
         var list = await _testHelperService.Business.OwnCompany.Service.GetAllAvailableAsync();
 
         Assert.That(list, Is.Not.Null);
-        Assert.That(list, Is.InstanceOf<List<Models.OwnCompany>>());
+        Assert.That(list, Is.InstanceOf<List<Domain.Business.OwnCompany>>());
         Assert.That(list, Has.Count.EqualTo(expectedQuantity));
     }
 
@@ -126,7 +127,7 @@ public class OwnCompanyServiceTests
         var list = await _testHelperService.Business.OwnCompany.Service.GetAllDeletedAsync();
 
         Assert.That(list, Is.Not.Null);
-        Assert.That(list, Is.InstanceOf<List<Models.OwnCompany>>());
+        Assert.That(list, Is.InstanceOf<List<Domain.Business.OwnCompany>>());
         Assert.That(list, Has.Count.EqualTo(expectedQuantity));
     }
 }

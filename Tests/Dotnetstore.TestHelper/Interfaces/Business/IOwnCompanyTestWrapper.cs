@@ -1,4 +1,4 @@
-﻿using Dotnetstore.Business.Services.OwnCompanies;
+﻿using Dotnetstore.Intranet.Contract.Business;
 
 namespace Dotnetstore.TestHelper.Interfaces.Business;
 

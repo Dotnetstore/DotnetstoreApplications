@@ -1,3 +1,4 @@
+using Dotnetstore.WebAPI.Intranet.Interfaces;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
 
@@ -6,7 +7,24 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 var services = builder.Services;
 
+var myAllowSpecificOrigins = "_myAllowSpecificOrigins";
+
+services.AddCors(q =>
+{
+    q.AddPolicy(name: myAllowSpecificOrigins,
+        policy =>
+        {
+            policy.AllowAnyOrigin()
+                .AllowAnyHeader()
+                .AllowAnyMethod();
+        });
+});
+
 Dotnetstore.WebAPI.Intranet.IoC.BootstrapIServiceCollection.Build(ref services, builder.Configuration);
+var serviceProvider = services.BuildServiceProvider();
+var setupService = serviceProvider.GetService<ISetupService>();
+
+setupService.AddFolders();
 
 services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -50,6 +68,7 @@ if (app.Environment.IsDevelopment())
     });
 }
 
+app.UseCors(myAllowSpecificOrigins);
 app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers();

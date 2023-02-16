@@ -9,7 +9,9 @@ public static class BootstrapIServiceCollection
 {
     public static void Build(ref IServiceCollection serviceCollection, IConfiguration configuration)
     {
-        Dotnetstore.Business.IoC.BootstrapIServiceCollection.Build(ref serviceCollection, configuration);
+        Dotnetstore.Core.IoC.BootstrapIServiceCollection.Build(ref serviceCollection, configuration);
+        Dotnetstore.Business.Repository.EF.IoC.BootstrapIServiceCollection.Build(ref serviceCollection, configuration);
+        Dotnetstore.Business.Service.IoC.BootstrapIServiceCollection.Build(ref serviceCollection);
 
         serviceCollection.AddSingleton<IBusinessWrapper, BusinessWrapper>();
         serviceCollection.AddSingleton<IUnitOfWorks, Services.UnitOfWorks>();

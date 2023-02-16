@@ -81,7 +81,7 @@ public class Business : ControllerBase, IDisposable
     /// <returns>OwnCompanyAddResponseDto</returns>
     /// POST: /api/Business/OwnCompanyAdd
     [HttpPost]
-    public async Task<ActionResult> OwnCompanyAddAsync([FromBody] OwnCompanyAddRequestDto ownCompanyAddRequestDto)
+    public async Task<ActionResult> OwnCompanyAddAsync(OwnCompanyAddRequestDto ownCompanyAddRequestDto)
     {
         var result = await _unitOfWorks.Business.OwnCompany.AddAsync(ownCompanyAddRequestDto);
         return Ok(result);

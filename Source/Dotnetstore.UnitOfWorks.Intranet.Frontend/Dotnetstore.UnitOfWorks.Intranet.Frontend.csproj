@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net7.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <Compile Remove="NewFolder\**" />
+	  <EmbeddedResource Remove="NewFolder\**" />
+	  <None Remove="NewFolder\**" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Folder Include="Businesses\" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\Dotnetstore.Core\Dotnetstore.Core.csproj" />
+		<ProjectReference Include="..\Dotnetstore.Shared\Dotnetstore.Shared.csproj" />
+		<Folder Include="IoC\" />
+	</ItemGroup>
+
+</Project>
