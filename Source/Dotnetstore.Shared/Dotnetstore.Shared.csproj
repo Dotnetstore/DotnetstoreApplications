@@ -10,4 +10,8 @@
     <Folder Include="Business\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Dotnetstore.Core\Dotnetstore.Core.csproj" />
+  </ItemGroup>
+
 </Project>

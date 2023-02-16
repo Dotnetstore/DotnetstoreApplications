@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Dotnetstore.Shared.Common;
 
 namespace Dotnetstore.Shared.Business;
 
