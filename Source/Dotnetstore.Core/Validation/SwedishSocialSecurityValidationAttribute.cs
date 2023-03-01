@@ -6,18 +6,29 @@ namespace Dotnetstore.Core.Validation;
 [AttributeUsage(AttributeTargets.Field | AttributeTargets.Property, AllowMultiple = false, Inherited = true)]
 public class SwedishSocialSecurityValidationAttribute : ValidationAttribute
 {
-    public SwedishSocialSecurityValidationAttribute()
+    private bool _isNullable;
+
+    public SwedishSocialSecurityValidationAttribute(bool isNullable)
     {
         ErrorMessage = "Corporate ID is not valid!";
+        _isNullable = isNullable;
     }
 
-    public SwedishSocialSecurityValidationAttribute(string? errorMessage)
+    public SwedishSocialSecurityValidationAttribute(bool isNullable, string? errorMessage)
     {
         ErrorMessage = errorMessage;
+        _isNullable = isNullable;
     }
 
     public override bool IsValid(object? value)
     {
-        return value is null || new SwedishSocialSecurityNumber(value.ToString()).IsValid;
+        var number = value?.ToString();
+
+        if (_isNullable)
+        {
+            return string.IsNullOrWhiteSpace(number) || new SwedishSocialSecurityNumber(number).IsValid;
+        }
+
+        return new SwedishSocialSecurityNumber(number ?? "").IsValid;
     }
 }

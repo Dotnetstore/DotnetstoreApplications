@@ -9,6 +9,6 @@ public class CompanyDto : BaseInfoModelDto
     [MinLength(0)]
     [MaxLength(20)]
     [DataType(DataType.Text)]
-    [SwedishSocialSecurityValidation]
+    [SwedishSocialSecurityValidation(true)]
     public string? CorporateID { get; set; }
 }
