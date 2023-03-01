@@ -29,7 +29,7 @@
                            AdornmentColor="Color.Inherit">
                         @foreach (var company in _ownCompanyDtos)
                         {
-                            <MudSelectItem Value="@company.ID">@company.Name</MudSelectItem>
+                            <MudSelectItem Value="@company.ID.ToString()">@company.ToString()</MudSelectItem>
                         }
                     </MudSelect>
                     <MudTextField T="string"

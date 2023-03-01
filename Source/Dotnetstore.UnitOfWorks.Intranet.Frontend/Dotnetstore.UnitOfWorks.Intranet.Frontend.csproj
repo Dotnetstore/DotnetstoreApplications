@@ -17,7 +17,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\Dotnetstore.Core\Dotnetstore.Core.csproj" />
 		<ProjectReference Include="..\Dotnetstore.Shared\Dotnetstore.Shared.csproj" />
 		<Folder Include="IoC\" />
 	</ItemGroup>
