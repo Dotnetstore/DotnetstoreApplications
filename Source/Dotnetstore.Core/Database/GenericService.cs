@@ -24,10 +24,10 @@ public class GenericService<T> : Disposable, IGenericService<T> where T : BaseMo
         entity.CreatedDate = DateTimeOffset.Now;
         entity.CreatedByID = userID;
         entity.IsDeleted = false;
-        entity.IsGDPR = false;
         entity.IsSystem = false;
         entity.IsVisible = true;
-        entity.IsUpdated = true;
+        entity.IsUpdated = false;
+        entity.IsGDPR ??= false;
 
         return await GenericRepository.AddAsync(entity);
     }

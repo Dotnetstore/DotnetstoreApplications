@@ -9,11 +9,12 @@ public static class BootstrapIServiceCollection
 {
     public static void Build(ref IServiceCollection serviceCollection, IConfiguration configuration)
     {
-        Dotnetstore.Core.IoC.BootstrapIServiceCollection.Build(ref serviceCollection, configuration);
-        Dotnetstore.Business.Repository.EF.IoC.BootstrapIServiceCollection.Build(ref serviceCollection, configuration);
-        Dotnetstore.Business.Service.IoC.BootstrapIServiceCollection.Build(ref serviceCollection);
+        Core.IoC.BootstrapIServiceCollection.Build(ref serviceCollection, configuration);
+        Business.Repository.EF.IoC.BootstrapIServiceCollection.Build(ref serviceCollection, configuration);
+        Business.Service.IoC.BootstrapIServiceCollection.Build(ref serviceCollection);
 
         serviceCollection.AddSingleton<IBusinessWrapper, BusinessWrapper>();
         serviceCollection.AddSingleton<IUnitOfWorks, Services.UnitOfWorks>();
+        serviceCollection.AddSingleton<IUnitOfWorkSetupService, SetupService>();
     }
 }

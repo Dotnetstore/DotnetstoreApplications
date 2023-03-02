@@ -1,5 +1,6 @@
 ﻿using Dotnetstore.Core.Abstracts;
 using Dotnetstore.Core.Interfaces;
+using Dotnetstore.UnitOfWorks.Intranet.Interfaces;
 using Dotnetstore.WebAPI.Intranet.Interfaces;
 using Microsoft.Data.Sqlite;
 
@@ -9,13 +10,16 @@ public class SetupService : Disposable, ISetupService
 {
     private IConfiguration? _configuration;
     private IPathService? _pathService;
+    private IUnitOfWorkSetupService? _unitOfWorkSetupService;
 
     public SetupService(
         IConfiguration configuration,
-        IPathService pathService)
+        IPathService pathService,
+        IUnitOfWorkSetupService unitOfWorkSetupService)
     {
         _configuration = configuration;
         _pathService = pathService;
+        _unitOfWorkSetupService = unitOfWorkSetupService;
     }
 
     void ISetupService.AddFolders()
@@ -23,6 +27,28 @@ public class SetupService : Disposable, ISetupService
         AddApplicationFolder();
         AddDatabaseFolder();
         AddSQLiteDatabaseFile();
+    }
+
+    async Task ISetupService.RunSetupAsync()
+    {
+        if (_unitOfWorkSetupService is null)
+        {
+            return;
+        }
+
+        await _unitOfWorkSetupService.RunSetupAsync();
+    }
+
+    protected override void DisposeManaged()
+    {
+        if (!IsDisposed)
+        {
+            _configuration = null;
+            _pathService = null;
+            _unitOfWorkSetupService = null;
+        }
+
+        base.DisposeManaged();
     }
 
     private void AddApplicationFolder()
@@ -58,16 +84,5 @@ public class SetupService : Disposable, ISetupService
             sqLiteConnection.Open();
             sqLiteConnection.Close();
         }
-    }
-
-    protected override void DisposeManaged()
-    {
-        if (!IsDisposed)
-        {
-            _configuration = null;
-            _pathService = null;
-        }
-
-        base.DisposeManaged();
     }
 }

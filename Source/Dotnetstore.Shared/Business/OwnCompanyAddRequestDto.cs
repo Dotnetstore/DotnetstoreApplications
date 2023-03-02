@@ -1,5 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Dotnetstore.Core.Validation;
 using Dotnetstore.Shared.Common;
+using System.ComponentModel.DataAnnotations;
 
 namespace Dotnetstore.Shared.Business;
 
@@ -23,5 +24,6 @@ public class OwnCompanyAddRequestDto : UserIDDto
     [MinLength(0)]
     [MaxLength(20)]
     [DataType(DataType.Text)]
+    [SwedishSocialSecurityValidation]
     public string? CorporateID { get; set; }
 }

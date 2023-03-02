@@ -22,6 +22,7 @@ public sealed class OwnCompanyRepository : GenericRepository<OwnCompany, Busines
         }
 
         return await cx.OwnCompanies
+            .Where(q => q.IsVisible.HasValue && q.IsVisible.Value)
             .OrderBy(q => q.Name)
             .ThenBy(q => q.CorporateID)
             .AsNoTracking()
@@ -38,7 +39,8 @@ public sealed class OwnCompanyRepository : GenericRepository<OwnCompany, Busines
         }
 
         return await cx.OwnCompanies
-            .Where(q => !q.IsDeleted.HasValue || q.IsDeleted.HasValue && !q.IsDeleted.Value)
+            .Where(q => (!q.IsDeleted.HasValue || q.IsDeleted.HasValue && !q.IsDeleted.Value) &&
+                        q.IsVisible.HasValue && q.IsVisible.Value)
             .OrderBy(q => q.Name)
             .ThenBy(q => q.CorporateID)
             .AsNoTracking()
@@ -55,7 +57,8 @@ public sealed class OwnCompanyRepository : GenericRepository<OwnCompany, Busines
         }
 
         return await cx.OwnCompanies
-            .Where(q => q.IsDeleted.HasValue && q.IsDeleted.Value)
+            .Where(q => q.IsDeleted.HasValue && q.IsDeleted.Value &&
+                        q.IsVisible.HasValue && q.IsVisible.Value)
             .OrderBy(q => q.Name)
             .ThenBy(q => q.CorporateID)
             .AsNoTracking()
