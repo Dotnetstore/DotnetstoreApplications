@@ -1,9 +1,7 @@
 ﻿@page "/RegisterOwnCompany"
-@using Dotnetstore.UnitOfWorks.Intranet.Frontend
 @using Dotnetstore.Shared.Business
 @inject NavigationManager NavigationManager
 @inject IStringLocalizer<RegisterOwnCompanyResource> Local
-@inject IStringLocalizer<Resource> Global
 @inject IUnitOfWork UnitOfWork
 
 <PageTitle>Dotnetstore - @Local["RegisterOwnCompany"]</PageTitle>
@@ -42,15 +40,11 @@
                               AdornmentIcon="@Icons.Material.Filled.Description"
                               AdornmentColor="Color.Inherit" />
                 <div class="d-flex align-center justify-space-between">
-                    @*<MudCheckBox T="bool"
-                    Required="true"
-                    RequiredError="@Local["YouMustAgree"]"
-                    Label="@Local["IAgree"]" />*@
                     <MudButton Variant="Variant.Filled"
                                Color="Color.Primary"
                                Disabled="@(!success)"
                                Class="ml-auto"
-                               OnClick="SaveOwnCompany">@Local["Save"]</MudButton>
+                               OnClick="SaveOwnCompanyAsync">@Global["Save"]</MudButton>
                 </div>
             </MudForm>
         </MudPaper>
@@ -58,20 +52,20 @@
             <MudButton Variant="Variant.Filled"
                        Color="Color.Primary"
                        DisableElevation="true"
-                       OnClick="@(()=>form.Validate())">@Local["Validate"]</MudButton>
+                       OnClick="@(()=>form.Validate())">@Global["Validate"]</MudButton>
             <MudButton Variant="Variant.Filled"
                        Color="Color.Secondary"
                        DisableElevation="true"
                        OnClick="@(()=>form.Reset())"
-                       Class="mx-2">@Local["Reset"]</MudButton>
+                       Class="mx-2">@Global["Reset"]</MudButton>
             <MudButton Variant="Variant.Filled"
                        DisableElevation="true"
-                       OnClick="@(()=>form.ResetValidation())">@Local["ResetValidation"]</MudButton>
+                       OnClick="@(()=>form.ResetValidation())">@Global["ResetValidation"]</MudButton>
         </MudPaper>
     </MudItem>
     <MudItem xs="12" sm="5">
         <MudPaper Class="pa-4 mud-height-full">
-            <MudText Typo="Typo.subtitle2">@($"Errors ({errors.Length})")</MudText>
+            <MudText Typo="Typo.subtitle2">@($"{@Global["Errors"]} ({errors.Length})")</MudText>
                 @foreach (var error in errors)
             {
                 <MudText Color="@Color.Error">@error</MudText>
@@ -79,29 +73,46 @@
         </MudPaper>
     </MudItem>
 </MudGrid>
+
 @code {
     bool success;
     string[] errors = { };
     MudForm form;
 
-    private OwnCompanyAddRequestDto ownCompanyAddRequestDto = new OwnCompanyAddRequestDto();
+    private OwnCompanyAddRequestDto ownCompanyAddRequestDto = new();
 
-    private async Task SaveOwnCompany()
+    private async Task SaveOwnCompanyAsync()
     {
-        var result = await UnitOfWork.Business.OwnCompany.AddAsync(ownCompanyAddRequestDto);
+        errors = new[] { "", "", "" };
 
-        if (result.Success)
+        try
         {
-            NavigationManager.NavigateTo("/");
+            var result = await UnitOfWork.Business.OwnCompany.AddAsync(ownCompanyAddRequestDto);
+
+            if (result.Success)
+            {
+                NavigationManager.NavigateTo("/");
+            }
+            else
+            {
+                var responseMessage = result?.HttpResponseMessage?.ToString() ?? "";
+                var errorMessage = "Something went wrong";
+                var stackTrace = "";
+
+                if (result?.Response is not null)
+                {
+                    errorMessage = result?.Response?.ErrorMessage ?? "Something went wrong";
+                    stackTrace = result?.Response?.StackTrace ?? "";
+                }
+
+                errors[0] = responseMessage;
+                errors[1] = errorMessage;
+                errors[2] = stackTrace;
+            }
         }
-        else
+        catch (Exception exception)
         {
-            var errorMessage = result.Response.ErrorMessage;
-            var stackTrace = result.Response.StackTrace;
-
-            errors[0] = result.HttpResponseMessage.ToString();
-            errors[1] = errorMessage ?? "";
-            errors[2] = stackTrace ?? "";
+            errors[0] = exception.Message;
         }
     }
 }

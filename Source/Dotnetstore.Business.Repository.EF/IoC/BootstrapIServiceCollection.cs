@@ -12,6 +12,7 @@ public static class BootstrapIServiceCollection
 {
     public static void Build(ref IServiceCollection serviceCollection, IConfiguration configuration)
     {
+        serviceCollection.AddSingleton<IBusinessSetupService, SetupService>();
         serviceCollection.AddSingleton<IOwnCompanyRepository, OwnCompanyRepository>();
 
         var serviceProvider = serviceCollection.BuildServiceProvider();

@@ -25,6 +25,7 @@ var serviceProvider = services.BuildServiceProvider();
 var setupService = serviceProvider.GetService<ISetupService>();
 
 setupService.AddFolders();
+await setupService.RunSetupAsync();
 
 services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

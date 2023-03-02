@@ -3,4 +3,6 @@
 public interface ISetupService
 {
     void AddFolders();
+
+    Task RunSetupAsync();
 }

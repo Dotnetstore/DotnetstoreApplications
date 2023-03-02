@@ -9,5 +9,7 @@ public sealed class BusinessContext : DbContext
     {
     }
 
+    public DbSet<Employee> Employees => Set<Employee>();
+
     public DbSet<OwnCompany> OwnCompanies => Set<OwnCompany>();
 }
